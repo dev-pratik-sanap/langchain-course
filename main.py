@@ -9,6 +9,7 @@ from langchain.tools import tool
 from langchain_core.messages import HumanMessage
 from langchain_openai import ChatOpenAI
 from langchain_tavily import TavilySearch
+from langchain_ollama import ChatOllama
 
 
 class Source(BaseModel):
@@ -25,8 +26,7 @@ class AgentResponse(BaseModel):
         default_factory=list, description="List of sources used to generate the answer"
     )
 
-
-llm = ChatOpenAI(model="gpt-5")
+llm = ChatOllama(model="qwen3:8b")
 tools = [TavilySearch()]
 agent = create_agent(model=llm, tools=tools, response_format=AgentResponse)
 
